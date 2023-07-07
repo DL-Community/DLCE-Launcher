@@ -24,6 +24,7 @@ namespace DLPortLauncher
             saveFileDialog.FileName = "DancingLine_Save.reg";
             saveFileDialog.Title = "导出注册表";
             saveFileDialog.ShowDialog();
+
             //导出注册表
             System.Diagnostics.Process.Start("regedit.exe", string.Format("/e {0} {1}", saveFileDialog.FileName, regPath));
 
@@ -42,7 +43,8 @@ namespace DLPortLauncher
             File.WriteAllText(saveFileDialog.FileName, base64);
 
             //提示导出成功
-            MessageBox.Show("导出成功！", "导出注册表", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("导出成功！\n\n文件存储在：" + saveFileDialog.FileName, "导出注册表", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        
         }
 
 
@@ -81,6 +83,12 @@ namespace DLPortLauncher
             openFileDialog.Title = "导入注册表";
             openFileDialog.ShowDialog();
 
+            //判断是否取消了导入
+            if (openFileDialog.FileName == "")
+            {
+                return;
+            }
+
             //将文件存储到临时文件
             File.WriteAllText(openFileDialog.FileName + ".tmp", File.ReadAllText(openFileDialog.FileName));
 
@@ -98,6 +106,9 @@ namespace DLPortLauncher
 
             //删除MAC地址
             lines[lines.Length - 1] = "";
+            
+            //清空注册表
+            System.Diagnostics.Process.Start("regedit.exe", "/s \"HKEY_CURRENT_USER\\Software\\YINSU Studio\\Dancing Line\"");
 
             //写入文件
             File.WriteAllLines(openFileDialog.FileName + ".tmp.reg", lines);
@@ -105,7 +116,8 @@ namespace DLPortLauncher
             //导入注册表
             System.Diagnostics.Process.Start("regedit.exe", string.Format("/s {0}", openFileDialog.FileName + ".tmp.reg"));
 
-            //删除临时文件
+            //1秒后删除临时文件
+            System.Threading.Thread.Sleep(1000);
             File.Delete(openFileDialog.FileName + ".tmp");
             File.Delete(openFileDialog.FileName + ".tmp.reg");
 
