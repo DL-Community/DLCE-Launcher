@@ -1,16 +1,16 @@
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace DLPortLauncher
+namespace DLCELauncher
 {
     public partial class MainForm : Form
     {
+        string ProgramVersion = "1.2.0.0";
         AutoSizeFormClass ASFC = new AutoSizeFormClass();
         string GamePath;
         string StartArgument;
+
         public MainForm()
         {
             InitializeComponent();
@@ -322,24 +322,28 @@ namespace DLPortLauncher
             {
                 WebClient webClient = new WebClient();
                 webClient.Encoding = Encoding.UTF8;
-                string update = webClient.DownloadString(updateFile);
+                string remoteVer = webClient.DownloadString(updateFile);
 
-                //获取版本号
-                string[] updateInfo = update.Split('\n');
+                Version remoteVersion = new Version(remoteVer);
+                Version localVersion = new Version(ProgramVersion);
 
-                //获取当前软件的版本号
-                string[] versionInfo = Application.ProductVersion.Split('.');
-                int[] localVersion = new int[4];
-                for (int i = 0; i < 4; i++)
+                if (remoteVersion > localVersion)
                 {
-                    localVersion[i] = Convert.ToInt32(versionInfo[i]);
+                    DialogResult dialogResult = MessageBox.Show("检测到新版本，是否更新？\n\n当前版本：" + ProgramVersion + "\n最新版本：" + remoteVer , "启动器更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //下载更新
+                        System.Diagnostics.Process.Start("explorer.exe", "https://github.com/AsabaSushi/DLPort-Launcher/releases/tag/" + remoteVer);
+                    }
                 }
-                int[] remoteVersion = new int[4];
-                for (int i = 0; i < 4; i++)
+                else
                 {
-                    remoteVersion[i] = Convert.ToInt32(updateInfo[i]);
+                    DialogResult dialogResult = MessageBox.Show("当前已是最新版本", "启动器更新", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("检查更新失败，请检查网络连接是否通畅", "启动器更新", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -417,6 +421,11 @@ namespace DLPortLauncher
         {
             SaveForm saveForm = new SaveForm();
             saveForm.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

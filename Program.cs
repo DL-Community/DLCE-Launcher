@@ -1,4 +1,6 @@
-namespace DLPortLauncher
+using DLCELauncher;
+
+namespace DLCELauncher
 {
     internal static class Program
     {

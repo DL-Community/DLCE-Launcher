@@ -1,4 +1,4 @@
-﻿namespace DLPortLauncher
+﻿namespace DLCELauncher
 {
     partial class MainForm
     {
@@ -83,7 +83,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.PortLogo;
+            pictureBox1.BackgroundImage = Properties.Resources.PortLogo;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(24, 24);
             pictureBox1.MaximumSize = new Size(100, 100);
             pictureBox1.MinimumSize = new Size(100, 100);
@@ -92,6 +93,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // Name_Label
             // 
@@ -162,7 +164,6 @@
             // SetPath_Button
             // 
             SetPath_Button.BackColor = Color.Transparent;
-            SetPath_Button.BackgroundImage = Properties.Resources.编辑__1_;
             SetPath_Button.BackgroundImageLayout = ImageLayout.Zoom;
             SetPath_Button.ForeColor = SystemColors.ControlLightLight;
             SetPath_Button.ImageAlign = ContentAlignment.MiddleLeft;

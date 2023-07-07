@@ -1,4 +1,4 @@
-﻿namespace DLPortLauncher
+﻿namespace DLCELauncher
 {
     partial class SaveForm
     {
@@ -36,7 +36,7 @@
             // ExportButton
             // 
             ExportButton.Font = new Font("Microsoft YaHei UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
-            ExportButton.Location = new Point(98, 123);
+            ExportButton.Location = new Point(16, 90);
             ExportButton.Name = "ExportButton";
             ExportButton.Size = new Size(180, 72);
             ExportButton.TabIndex = 0;
@@ -47,7 +47,7 @@
             // ImportButton
             // 
             ImportButton.Font = new Font("Microsoft YaHei UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
-            ImportButton.Location = new Point(98, 45);
+            ImportButton.Location = new Point(16, 12);
             ImportButton.Name = "ImportButton";
             ImportButton.Size = new Size(180, 72);
             ImportButton.TabIndex = 1;
@@ -58,9 +58,9 @@
             // label1
             // 
             label1.Font = new Font("Microsoft YaHei UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(52, 212);
+            label1.Location = new Point(16, 165);
             label1.Name = "label1";
-            label1.Size = new Size(263, 127);
+            label1.Size = new Size(180, 127);
             label1.TabIndex = 2;
             label1.Text = "本存档管理功能所建立的存档仅限于当前设备使用";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -69,14 +69,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.PortLogo;
             BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(359, 361);
+            ClientSize = new Size(208, 295);
             Controls.Add(label1);
             Controls.Add(ImportButton);
             Controls.Add(ExportButton);
-            MaximumSize = new Size(375, 400);
-            MinimumSize = new Size(375, 400);
+            MaximumSize = new Size(224, 334);
+            MinimumSize = new Size(224, 334);
             Name = "SaveForm";
             Text = "存档管理";
             ResumeLayout(false);

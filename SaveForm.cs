@@ -2,7 +2,7 @@
 using System.Management;
 using System.Text;
 
-namespace DLPortLauncher
+namespace DLCELauncher
 {
     public partial class SaveForm : Form
     {
@@ -44,7 +44,7 @@ namespace DLPortLauncher
 
             //提示导出成功
             MessageBox.Show("导出成功！\n\n文件存储在：" + saveFileDialog.FileName, "导出注册表", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        
+
         }
 
 
@@ -106,7 +106,7 @@ namespace DLPortLauncher
 
             //删除MAC地址
             lines[lines.Length - 1] = "";
-            
+
             //清空注册表
             System.Diagnostics.Process.Start("regedit.exe", "/s \"HKEY_CURRENT_USER\\Software\\YINSU Studio\\Dancing Line\"");
 
