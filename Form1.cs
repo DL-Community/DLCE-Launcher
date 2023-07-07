@@ -315,7 +315,32 @@ namespace DLPortLauncher
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("该功能尚未开发完毕", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //检查启动器更新
+            string updateFile = "https://raw.githubusercontent.com/AsabaSushi/DLPort-Launcher/master/version.txt";
+
+            try
+            {
+                WebClient webClient = new WebClient();
+                webClient.Encoding = Encoding.UTF8;
+                string update = webClient.DownloadString(updateFile);
+
+                //获取版本号
+                string[] updateInfo = update.Split('\n');
+
+                //获取当前软件的版本号
+                string[] versionInfo = Application.ProductVersion.Split('.');
+                int[] localVersion = new int[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    localVersion[i] = Convert.ToInt32(versionInfo[i]);
+                }
+                int[] remoteVersion = new int[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    remoteVersion[i] = Convert.ToInt32(updateInfo[i]);
+                }
+
+            }
         }
 
         void GetNotice()

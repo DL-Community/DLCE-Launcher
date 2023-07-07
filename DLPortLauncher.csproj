@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Remove="app1.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="PortLogo.ico" />
   </ItemGroup>
 
