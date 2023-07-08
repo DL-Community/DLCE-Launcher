@@ -5,6 +5,7 @@ using UnityEngine;
 public class GetTextFromURL : MonoBehaviour
 {
     public string url;
+    public bool hasContent = true;
     public ContentSizeFitter content;
 
     private void Start()
@@ -25,8 +26,11 @@ public class GetTextFromURL : MonoBehaviour
         GetComponent<Text>().text = www.text;
 
         yield return new WaitForEndOfFrame();
-        content.enabled = false;
-        content.enabled = true;
-        
+
+        if (hasContent)
+        {
+            content.enabled = false;
+            content.enabled = true;
+        }
     }
 }
